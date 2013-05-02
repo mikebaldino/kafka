@@ -22,9 +22,17 @@ libraryDependencies ++= Seq(
 
 libraryDependencies <<= (scalaVersion, libraryDependencies) { (sv, deps) =>
   deps :+ (sv match {
-    case "2.8.0" => "org.scalatest" %  "scalatest" % "1.2" % "test"
-    case _       => "org.scalatest" %% "scalatest" % "1.8" % "test"
+    case "2.8.0"  => "org.scalatest" %  "scalatest" % "1.2" % "test"
+    case "2.10.1" => "org.scalatest" %  "scalatest_2.10.0" % "1.8" % "test"
+    case _        => "org.scalatest" %% "scalatest" % "1.8" % "test"
   })
+}
+
+unmanagedSourceDirectories in Compile <+= (sourceDirectory in Compile, scalaVersion){ (s,v) => 
+  s / ("scala-" + (v match {
+    case v if v.startsWith("2.8.") => "2.8.x" 
+    case _ => "2.9.x" // also for 2.10
+  })) 
 }
 
 assemblySettings

@@ -28,8 +28,8 @@ object KafkaBuild extends Build {
   val commonSettings = Seq(
     organization := "org.apache",
     scalacOptions ++= Seq("-deprecation", "-unchecked", "-g:none"),
-    crossScalaVersions := Seq("2.8.0","2.8.2", "2.9.1", "2.9.2"),
-    scalaVersion := "2.8.0",
+    crossScalaVersions := Seq("2.8.2", "2.9.1", "2.9.2", "2.10.1"),
+    scalaVersion := "2.10.1",
     version := "0.8.0-SNAPSHOT",
     buildNumber := System.getProperty("build.number", ""),
     version <<= (buildNumber, version)  { (build, version)  => if (build == "") version else version + "+" + build},

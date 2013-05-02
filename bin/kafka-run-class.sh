@@ -22,10 +22,10 @@ fi
 
 base_dir=$(dirname $0)/..
 
-SCALA_VERSION=2.8.0
+SCALA_VERSION=2.10
 
 # assume all dependencies have been packaged into one jar with sbt-assembly's task "assembly-package-dependency"
-for file in $base_dir/core/target/scala-2.8.0/*.jar;
+for file in $base_dir/core/target/scala-${SCALA_VERSION}/*.jar;
 do
   CLASSPATH=$CLASSPATH:$file
 done
@@ -51,7 +51,7 @@ if [ -z "$KAFKA_JMX_OPTS" ]; then
 fi
 
 if [ -z "$KAFKA_OPTS" ]; then
-  KAFKA_OPTS="-Xmx512M -server  -Dlog4j.configuration=file:$base_dir/config/log4j.properties"
+  KAFKA_OPTS="-Xmx64M -server -Dlog4j.configuration=file:$base_dir/config/log4j.properties"
 fi
 
 if [  $JMX_PORT ]; then
